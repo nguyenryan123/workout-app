@@ -1,5 +1,6 @@
 package model;
 
+import controllers.AccountController;
 import org.springframework.data.annotation.Id;
 
 public class Account {
@@ -8,6 +9,8 @@ public class Account {
 
     private String name;
     private String passkey;
+
+    public Account(){}
 
     public String getPasskey() {
         return passkey;
