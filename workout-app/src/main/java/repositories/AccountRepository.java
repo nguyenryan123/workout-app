@@ -11,4 +11,7 @@ public interface AccountRepository extends CrudRepository<Account,Long> {
     @Modifying
     @Query("INSERT INTO account (name,passkey) VALUES (:name,:passkey)")
     void insertAccount(String name, String passkey);
+
+    @Query("SELECT * FROM account WHERE name = :name AND passkey = :passkey")
+    Account findAccountByNameAndPasskey(String name, String passkey);
 }

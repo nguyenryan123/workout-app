@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example.workout_app,controllers,repositories"})
+@ComponentScan(basePackages = {"com.example.workout_app,controllers,repositories,services"})
 @EnableJdbcRepositories(basePackages = "repositories")
 public class WorkoutAppApplication {
 
