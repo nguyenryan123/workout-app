@@ -23,19 +23,4 @@ public class AccountController {
     public Iterable<Account> getAccounts(){
         return accountRepository.findAll();
     }
-
-    @PostMapping("/accounts")
-    public void insertAccount(
-            @RequestBody Account account
-    ){
-        accountRepository.insertAccount(account.getName(), account.getPasskey());
-    }
-
-    @GetMapping("/getAccount")
-    public Account getAccount(
-            @RequestParam String name,
-            @RequestParam String passkey
-    ){
-        return accountRepository.findAccountByNameAndPasskey(name,passkey);
-    }
 }

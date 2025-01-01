@@ -14,4 +14,10 @@ public interface AccountRepository extends CrudRepository<Account,Long> {
 
     @Query("SELECT * FROM account WHERE name = :name AND passkey = :passkey")
     Account findAccountByNameAndPasskey(String name, String passkey);
+
+    @Query("SELECT * FROM account WHERE name = :name")
+    Account findByUser(String name);
+
+    @Query("SELECT * FROM account WHERE passkey = :passkey")
+    Account findByPasskey(String passkey);
 }
