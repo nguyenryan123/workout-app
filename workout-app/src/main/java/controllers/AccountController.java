@@ -8,15 +8,16 @@ import org.springframework.web.bind.annotation.*;
 import repositories.AccountRepository;
 import services.LoginService;
 
+
+//delete later
+@CrossOrigin
 @RestController
 public class AccountController {
     private final AccountRepository accountRepository;
-    private final LoginService loginService;
 
     @Autowired
-    public AccountController(AccountRepository accountRepository, LoginService loginService){
+    public AccountController(AccountRepository accountRepository){
         this.accountRepository = accountRepository;
-        this.loginService = loginService;
     }
 
     @GetMapping("/accounts")
