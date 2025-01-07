@@ -1,5 +1,6 @@
 package controllers;
 
+import exceptions.InvalidPasswordException;
 import exceptions.LoginDoesNotExistException;
 import exceptions.UserAlreadyExistsException;
 import model.ErrorDetails;
@@ -23,6 +24,15 @@ public class ExceptionControllerAdvice {
     public ResponseEntity<ErrorDetails> exceptionUserAlreadyExistsHandler(){
         ErrorDetails errorDetails = new ErrorDetails();
         errorDetails.setErrorMessage("User already exists");
+        return ResponseEntity
+                .badRequest()
+                .body(errorDetails);
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<ErrorDetails> exceptionInvalidPasswordException(){
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setErrorMessage("Invalid password");
         return ResponseEntity
                 .badRequest()
                 .body(errorDetails);

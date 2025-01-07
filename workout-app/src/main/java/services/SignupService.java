@@ -1,5 +1,6 @@
 package services;
 
+import exceptions.InvalidPasswordException;
 import exceptions.LoginDoesNotExistException;
 import exceptions.UserAlreadyExistsException;
 import model.Account;
@@ -19,6 +20,7 @@ public class SignupService {
     public void signup(String user, String passkey){
         Account account = accountRepository.findByUser(user);
         if(account != null) throw new UserAlreadyExistsException();
+        if(passkey.contains(" ") || passkey.isEmpty()) throw new InvalidPasswordException();
 
         accountRepository.insertAccount(user,passkey);
     }
