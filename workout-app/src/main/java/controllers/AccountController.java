@@ -11,7 +11,9 @@ import repositories.AccountRepository;
 import repositories.WorkoutRepository;
 import repositories.WorkoutSetRepository;
 import services.LoginService;
+import services.WorkoutService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -20,16 +22,13 @@ import java.util.List;
 @RestController
 public class AccountController {
     private final AccountRepository accountRepository;
-    private final WorkoutRepository workoutRepository;
-    private final WorkoutSetRepository workoutSetRepository;
+    private final WorkoutService workoutService;
 
     @Autowired
     public AccountController(AccountRepository accountRepository,
-                             WorkoutRepository workoutRepository,
-                             WorkoutSetRepository workoutSetRepository){
+                             WorkoutService workoutService){
         this.accountRepository = accountRepository;
-        this.workoutRepository = workoutRepository;
-        this.workoutSetRepository = workoutSetRepository;
+        this.workoutService = workoutService;
     }
 
     @GetMapping("/accounts")
@@ -37,30 +36,35 @@ public class AccountController {
         return accountRepository.findAll();
     }
 
-    @GetMapping("/w")
-    public Iterable<Workout> getWorkouts(){
-        return workoutRepository.findAll();
-    }
-
     @GetMapping("/workouts")
-    public List<Workout> getWorkout(
-            @RequestParam String userid
+    public Iterable<Workout> getWorkouts(
+            @RequestParam Long userId
     ){
-        Long user_id = Long.parseLong(userid);
-        return workoutRepository.findByUserId(user_id);
+        return workoutService.getAllWorkoutsFromUserId(userId);
     }
 
     @PostMapping("/workouts")
     public void addWorkout(
             @RequestParam String workoutName,
-            @RequestParam String userId
+            @RequestParam Long userId
     ){
-        Long user_id = Long.parseLong(userId);
-        workoutRepository.insertWorkout(workoutName,user_id);
+        workoutService.addWorkout(workoutName, userId);
     }
 
     @GetMapping("/sets")
-    public Iterable<WorkoutSet> getSets(){
-        return workoutSetRepository.findAll();
+    public List<WorkoutSet> getSets(
+            @RequestParam Long workoutId
+    ){
+        return workoutService.getAllSetsFromWorkout(workoutId);
+    }
+
+    @PostMapping("/sets")
+    public void addSetToWorkout(
+            @RequestParam BigDecimal weight,
+            @RequestParam int reps,
+            @RequestParam Long workoutId,
+            @RequestParam String workoutDate
+            ){
+        workoutService.addSet(weight, reps, workoutId, workoutDate);
     }
 }
