@@ -2,12 +2,14 @@ package controllers;
 
 import model.Account;
 import model.Workout;
+import model.WorkoutSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import repositories.AccountRepository;
 import repositories.WorkoutRepository;
+import repositories.WorkoutSetRepository;
 import services.LoginService;
 
 import java.util.List;
@@ -19,12 +21,15 @@ import java.util.List;
 public class AccountController {
     private final AccountRepository accountRepository;
     private final WorkoutRepository workoutRepository;
+    private final WorkoutSetRepository workoutSetRepository;
 
     @Autowired
     public AccountController(AccountRepository accountRepository,
-                             WorkoutRepository workoutRepository){
+                             WorkoutRepository workoutRepository,
+                             WorkoutSetRepository workoutSetRepository){
         this.accountRepository = accountRepository;
         this.workoutRepository = workoutRepository;
+        this.workoutSetRepository = workoutSetRepository;
     }
 
     @GetMapping("/accounts")
@@ -52,5 +57,10 @@ public class AccountController {
     ){
         Long user_id = Long.parseLong(userId);
         workoutRepository.insertWorkout(workoutName,user_id);
+    }
+
+    @GetMapping("/sets")
+    public Iterable<WorkoutSet> getSets(){
+        return workoutSetRepository.findAll();
     }
 }
