@@ -1,6 +1,7 @@
 package repositories;
 
 import model.Workout;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,8 @@ public interface WorkoutRepository extends CrudRepository<Workout,Long> {
 
     @Query("SELECT * FROM workout WHERE user_id = :user_id")
     List<Workout> findByUserId(Long user_id);
+
+    @Modifying
+    @Query("INSERT INTO workout (workout_name, user_id) VALUES (:workout_name, :user_id)")
+    void insertWorkout(String workout_name, Long user_id);
 }

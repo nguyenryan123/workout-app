@@ -44,4 +44,13 @@ public class AccountController {
         Long user_id = Long.parseLong(userid);
         return workoutRepository.findByUserId(user_id);
     }
+
+    @PostMapping("/workouts")
+    public void addWorkout(
+            @RequestParam String workoutName,
+            @RequestParam String userId
+    ){
+        Long user_id = Long.parseLong(userId);
+        workoutRepository.insertWorkout(workoutName,user_id);
+    }
 }
