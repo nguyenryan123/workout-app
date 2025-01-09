@@ -8,6 +8,8 @@ import services.WorkoutService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -66,7 +68,8 @@ public class WorkoutController {
             @RequestParam long userId,
             @RequestParam String date
     ){
-        LocalDate workoutDate = LocalDate.parse(date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+        LocalDate workoutDate = LocalDate.parse(date, formatter);
         return workoutService.allWorkoutDetailsFromUserId(userId, workoutDate);
     }
 }
