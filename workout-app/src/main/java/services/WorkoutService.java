@@ -33,9 +33,8 @@ public class WorkoutService {
         return workoutList;
     }
 
-    public void addSet(BigDecimal weight, int reps, Long workoutId, String workoutDate){
-        LocalDate workout_date = LocalDate.parse(workoutDate);
-        workoutSetRepository.addSetToWorkout(weight, reps, workoutId, workout_date);
+    public void addSet(BigDecimal weight, int reps, Long workoutId, LocalDate workoutDate){
+        workoutSetRepository.addSetToWorkout(weight, reps, workoutId, workoutDate);
     }
 
     public List<WorkoutSet> getAllSetsFromWorkout(Long workoutId){

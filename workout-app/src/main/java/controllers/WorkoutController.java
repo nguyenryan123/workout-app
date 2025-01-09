@@ -51,7 +51,9 @@ public class WorkoutController {
             @RequestParam Long workoutId,
             @RequestParam String workoutDate
     ){
-        workoutService.addSet(weight, reps, workoutId, workoutDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+        LocalDate date = LocalDate.parse(workoutDate, formatter);
+        workoutService.addSet(weight, reps, workoutId, date);
     }
 
     @GetMapping("/workoutDetails")
