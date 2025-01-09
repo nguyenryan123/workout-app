@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class WorkoutDetails {
-    private Long workout_id;
+    private long workout_id;
     private String workout_name;
     private List<WorkoutSet> sets;
+    private long earliestSet;
 
     public WorkoutDetails(){}
 
@@ -34,4 +35,11 @@ public class WorkoutDetails {
         this.sets = sets;
     }
 
+    public void setEarliestSet(long earliestSet) {
+        this.earliestSet = earliestSet;
+    }
+
+    public long getEarliestSet() {
+        return earliestSet;
+    }
 }

@@ -60,4 +60,13 @@ public class WorkoutController {
         LocalDate workoutDate = LocalDate.parse(date);
         return workoutService.getWorkoutDetailsFromWorkoutId(workoutId, workoutDate);
     }
+
+    @GetMapping("/allWorkoutDetails")
+    public List<WorkoutDetails> allWorkoutDetails(
+            @RequestParam long userId,
+            @RequestParam String date
+    ){
+        LocalDate workoutDate = LocalDate.parse(date);
+        return workoutService.allWorkoutDetailsFromUserId(userId, workoutDate);
+    }
 }
