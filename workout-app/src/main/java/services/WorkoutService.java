@@ -1,6 +1,7 @@
 package services;
 
 import model.Workout;
+import model.WorkoutDetails;
 import model.WorkoutSet;
 import org.springframework.stereotype.Service;
 import repositories.WorkoutRepository;
@@ -35,5 +36,15 @@ public class WorkoutService {
 
     public List<WorkoutSet> getAllSetsFromWorkout(Long workoutId){
         return workoutSetRepository.findSetsFromWorkout(workoutId);
+    }
+
+    public WorkoutDetails getWorkoutDetailsFromWorkoutId(Long workoutId, LocalDate date){
+        WorkoutDetails workoutDetails = new WorkoutDetails();
+        Workout workout = workoutRepository.findByWorkoutId(workoutId);
+        workoutDetails.setWorkout_id(workoutId);
+        workoutDetails.setWorkout_name(workout.getWorkoutName());
+        List<WorkoutSet> sets = workoutSetRepository.findSetsFromWorkoutWithDate(workoutId, date);
+        workoutDetails.setSets(sets);
+        return workoutDetails;
     }
 }

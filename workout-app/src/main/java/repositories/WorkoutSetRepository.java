@@ -19,4 +19,7 @@ public interface WorkoutSetRepository extends CrudRepository<WorkoutSet,Long> {
 
     @Query("SELECT * FROM workout_set WHERE workout_id = :workout_id")
     List<WorkoutSet> findSetsFromWorkout(Long workout_id);
+
+    @Query("SELECT * FROM workout_set WHERE workout_id = :workout_id AND workout_date = :workout_date")
+    List<WorkoutSet> findSetsFromWorkoutWithDate(Long workout_id, LocalDate workout_date);
 }

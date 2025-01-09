@@ -1,11 +1,13 @@
 package controllers;
 
 import model.Workout;
+import model.WorkoutDetails;
 import model.WorkoutSet;
 import org.springframework.web.bind.annotation.*;
 import services.WorkoutService;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin
@@ -48,5 +50,14 @@ public class WorkoutController {
             @RequestParam String workoutDate
     ){
         workoutService.addSet(weight, reps, workoutId, workoutDate);
+    }
+
+    @GetMapping("/workoutDetails")
+    public WorkoutDetails getWorkoutDetails(
+            @RequestParam Long workoutId,
+            @RequestParam String date
+    ){
+        LocalDate workoutDate = LocalDate.parse(date);
+        return workoutService.getWorkoutDetailsFromWorkoutId(workoutId, workoutDate);
     }
 }
