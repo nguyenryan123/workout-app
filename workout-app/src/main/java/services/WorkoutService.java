@@ -9,6 +9,7 @@ import repositories.WorkoutSetRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -44,6 +45,7 @@ public class WorkoutService {
         workoutDetails.setWorkout_id(workoutId);
         workoutDetails.setWorkout_name(workout.getWorkoutName());
         List<WorkoutSet> sets = workoutSetRepository.findSetsFromWorkoutWithDate(workoutId, date);
+        sets.sort(Comparator.comparingLong(WorkoutSet::getSetId));
         workoutDetails.setSets(sets);
         return workoutDetails;
     }
