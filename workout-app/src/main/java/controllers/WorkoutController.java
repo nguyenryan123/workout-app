@@ -9,6 +9,7 @@ import services.WorkoutService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -22,10 +23,9 @@ public class WorkoutController {
     }
 
     @GetMapping("/workouts")
-    public Iterable<Workout> getWorkouts(
+    public List<Workout> getWorkouts(
             @RequestParam Long userId
     ){
-//        Long user_id = Long.parseLong(userId);
         return workoutService.getAllWorkoutsFromUserId(userId);
     }
 

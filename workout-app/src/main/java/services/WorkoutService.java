@@ -28,7 +28,9 @@ public class WorkoutService {
     }
 
     public List<Workout> getAllWorkoutsFromUserId(Long userId){
-        return workoutRepository.findByUserId(userId);
+        List<Workout> workoutList = workoutRepository.findByUserId(userId);
+        workoutList.sort(Comparator.comparingLong(Workout::getWorkoutId));
+        return workoutList;
     }
 
     public void addSet(BigDecimal weight, int reps, Long workoutId, String workoutDate){
