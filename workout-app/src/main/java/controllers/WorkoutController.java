@@ -74,4 +74,11 @@ public class WorkoutController {
         LocalDate workoutDate = LocalDate.parse(date, formatter);
         return workoutService.allWorkoutDetailsFromUserId(userId, workoutDate);
     }
+
+    @PostMapping("/deleteWorkout")
+    public void deleteWorkout(
+            @RequestParam long workoutId
+    ){
+        workoutService.deleteWorkoutFromWorkoutId(workoutId);
+    }
 }

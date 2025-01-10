@@ -22,4 +22,8 @@ public interface WorkoutSetRepository extends CrudRepository<WorkoutSet,Long> {
 
     @Query("SELECT * FROM workout_set WHERE workout_id = :workout_id AND workout_date = :workout_date")
     List<WorkoutSet> findSetsFromWorkoutWithDate(Long workout_id, LocalDate workout_date);
+
+    @Modifying
+    @Query("DELETE FROM workout_set WHERE set_id = :set_id")
+    void deleteSetWithSetId(Long set_id);
 }

@@ -75,4 +75,12 @@ public class WorkoutService {
         workoutDetailsList.sort(Comparator.comparing(WorkoutDetails::getEarliestSet));
         return workoutDetailsList;
     }
+
+    public void deleteWorkoutFromWorkoutId(Long workoutId){
+        workoutRepository.deleteWorkout(workoutId);
+    }
+
+    public void deleteSetFromSetId(Long setId){
+        workoutSetRepository.deleteSetWithSetId(setId);
+    }
 }

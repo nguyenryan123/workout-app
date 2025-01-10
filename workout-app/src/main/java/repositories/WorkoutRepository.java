@@ -20,4 +20,8 @@ public interface WorkoutRepository extends CrudRepository<Workout,Long> {
     @Modifying
     @Query("INSERT INTO workout (workout_name, user_id) VALUES (:workout_name, :user_id)")
     void insertWorkout(String workout_name, Long user_id);
+
+    @Modifying
+    @Query("DELETE FROM workout WHERE workout_id = :workout_id")
+    void deleteWorkout(long workout_id);
 }
