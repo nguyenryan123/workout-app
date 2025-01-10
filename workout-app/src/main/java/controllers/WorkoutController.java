@@ -81,4 +81,11 @@ public class WorkoutController {
     ){
         workoutService.deleteWorkoutFromWorkoutId(workoutId);
     }
+
+    @PostMapping("/deleteSet")
+    public void deleteSet(
+            @RequestParam long setId
+    ){
+        workoutService.deleteSetFromSetId(setId);
+    }
 }
