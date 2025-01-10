@@ -24,4 +24,8 @@ public interface WorkoutRepository extends CrudRepository<Workout,Long> {
     @Modifying
     @Query("DELETE FROM workout WHERE workout_id = :workout_id")
     void deleteWorkout(long workout_id);
+
+    @Modifying
+    @Query("UPDATE workout SET workout_name = :workout_name WHERE workout_id = :workout_id")
+    void editWorkoutName(String workout_name, long workout_id);
 }

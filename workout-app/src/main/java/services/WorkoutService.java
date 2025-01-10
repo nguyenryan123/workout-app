@@ -83,4 +83,23 @@ public class WorkoutService {
     public void deleteSetFromSetId(Long setId){
         workoutSetRepository.deleteSetWithSetId(setId);
     }
+
+    public void editWorkoutName(String workoutName, Long workoutId){
+        workoutRepository.editWorkoutName(workoutName, workoutId);
+    }
+
+    public void editWorkoutSetWeight(BigDecimal weight, Long setId){
+        BigDecimal num = new BigDecimal(-1);
+        if(weight.equals(num)) return;
+
+        //if -1 is passed through update is cancelled
+        workoutSetRepository.editSetWeight(weight, setId);
+    }
+
+    public void editWorkoutSetReps(int reps, Long setId){
+        if(reps == -1) return;
+
+        //if -1 is passed through update is cancelled
+        workoutSetRepository.editSetReps(reps, setId);
+    }
 }

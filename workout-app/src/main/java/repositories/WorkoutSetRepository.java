@@ -26,4 +26,12 @@ public interface WorkoutSetRepository extends CrudRepository<WorkoutSet,Long> {
     @Modifying
     @Query("DELETE FROM workout_set WHERE set_id = :set_id")
     void deleteSetWithSetId(Long set_id);
+
+    @Modifying
+    @Query("UPDATE workout_set SET weight = :weight WHERE set_id = :set_id")
+    void editSetWeight(BigDecimal weight, Long set_id);
+
+    @Modifying
+    @Query("UPDATE workout_set SET reps = :reps WHERE set_id = :set_id")
+    void editSetReps(int reps, Long set_id);
 }

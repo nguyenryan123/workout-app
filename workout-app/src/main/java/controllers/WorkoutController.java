@@ -88,4 +88,22 @@ public class WorkoutController {
     ){
         workoutService.deleteSetFromSetId(setId);
     }
+
+    @PostMapping("/editWorkout")
+    public void editWorkout(
+            @RequestParam String workoutName,
+            @RequestParam Long workoutId
+    ){
+        workoutService.editWorkoutName(workoutName, workoutId);
+    }
+
+    @PostMapping("/editSet")
+    public void editSet(
+            @RequestParam BigDecimal weight,
+            @RequestParam int reps,
+            @RequestParam Long setId
+    ){
+        workoutService.editWorkoutSetWeight(weight,setId);
+        workoutService.editWorkoutSetReps(reps,setId);
+    }
 }
