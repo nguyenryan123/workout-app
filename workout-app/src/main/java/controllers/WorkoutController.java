@@ -8,6 +8,7 @@ import services.WorkoutService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class WorkoutController {
             @RequestParam Long workoutId,
             @RequestParam String workoutDate
     ){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(workoutDate, formatter);
         workoutService.addSet(weight, reps, workoutId, date);
     }
@@ -70,7 +71,7 @@ public class WorkoutController {
             @RequestParam long userId,
             @RequestParam String date
     ){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate workoutDate = LocalDate.parse(date, formatter);
         return workoutService.allWorkoutDetailsFromUserId(userId, workoutDate);
     }
@@ -105,5 +106,18 @@ public class WorkoutController {
     ){
         workoutService.editWorkoutSetWeight(weight,setId);
         workoutService.editWorkoutSetReps(reps,setId);
+    }
+
+    @GetMapping("/checkDay")
+    public List<Integer> checkDay(
+            @RequestParam Long userId,
+            @RequestParam LocalDate date
+    ){
+        YearMonth month = YearMonth.from(date);
+        LocalDate start = month.atDay(1);
+        LocalDate end = month.atEndOfMonth();
+        return workoutService.daysWithWorkout(userId,start,end);
+//        System.out.println(start + "\n" + end);
+
     }
 }
