@@ -8,14 +8,15 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface WorkoutSetRepository extends CrudRepository<WorkoutSet,Long> {
 
     @Modifying
-    @Query("INSERT INTO workout_set (weight, reps, workout_id, workout_date) VALUES (:weight, :reps, :workout_id, :workout_date)")
-    void addSetToWorkout(BigDecimal weight, int reps, Long workout_id, LocalDate workout_date);
+    @Query("INSERT INTO workout_set (weight, reps, workout_id, workout_date, date_time_added) VALUES (:weight, :reps, :workout_id, :workout_date, :date_time_added)")
+    void addSetToWorkout(BigDecimal weight, int reps, Long workout_id, LocalDate workout_date, Long date_time_added);
 
     @Query("SELECT * FROM workout_set WHERE workout_id = :workout_id")
     List<WorkoutSet> findSetsFromWorkout(Long workout_id);

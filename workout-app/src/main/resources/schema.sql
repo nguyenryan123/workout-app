@@ -17,6 +17,7 @@ CREATE TABLE workout_set (
     weight DOUBLE NOT NULL,
     reps INT NOT NULL,
     workout_id INT NOT NULL,
-    workout_date DATE,
+    workout_date DATE NOT NULL,
+    date_time_added INT NOT NULL,
     CONSTRAINT fk_workout_id FOREIGN KEY (workout_id) REFERENCES workout(workout_id) ON DELETE CASCADE
 );

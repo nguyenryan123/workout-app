@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class WorkoutSet {
     @Id
@@ -15,6 +16,8 @@ public class WorkoutSet {
     private long workoutId;
 
     private LocalDate workoutDate;
+
+    private long dateTimeAdded;
 
     public long getWorkoutId() {
         return workoutId;
@@ -54,5 +57,13 @@ public class WorkoutSet {
 
     public void setWorkoutDate(LocalDate workoutDate) {
         this.workoutDate = workoutDate;
+    }
+
+    public long getDateTimeAdded() {
+        return dateTimeAdded;
+    }
+
+    public void setDateTimeAdded(long dateTimeAdded) {
+        this.dateTimeAdded = dateTimeAdded;
     }
 }
