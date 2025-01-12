@@ -1,13 +1,13 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class WorkoutDetails {
     private long workout_id;
     private String workout_name;
     private List<WorkoutSet> sets;
-    private long earliestSet;
+//    private long earliestSet;
+    private Long earliestDateAdded;
 
     public WorkoutDetails(){}
 
@@ -35,11 +35,19 @@ public class WorkoutDetails {
         this.sets = sets;
     }
 
-    public void setEarliestSet(long earliestSet) {
-        this.earliestSet = earliestSet;
+    public Long getEarliestDateAdded() {
+        return earliestDateAdded;
     }
 
-    public long getEarliestSet() {
-        return earliestSet;
+    public void setEarliestDateAdded(Long earliestDateAdded) {
+        this.earliestDateAdded = earliestDateAdded;
     }
+
+    //    public void setEarliestSet(long earliestSet) {
+//        this.earliestSet = earliestSet;
+//    }
+//
+//    public long getEarliestSet() {
+//        return earliestSet;
+//    }
 }

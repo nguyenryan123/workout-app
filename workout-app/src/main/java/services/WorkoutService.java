@@ -10,6 +10,8 @@ import repositories.WorkoutSetRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -35,7 +37,9 @@ public class WorkoutService {
     }
 
     public void addSet(BigDecimal weight, int reps, Long workoutId, LocalDate workoutDate){
-        workoutSetRepository.addSetToWorkout(weight, reps, workoutId, workoutDate);
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("America/New_York"));
+        Long nowEpoch = now.atZone(ZoneId.systemDefault()).toEpochSecond();
+        workoutSetRepository.addSetToWorkout(weight, reps, workoutId, workoutDate, nowEpoch);
     }
 
     public List<WorkoutSet> getAllSetsFromWorkout(Long workoutId){
@@ -55,7 +59,7 @@ public class WorkoutService {
 
         sets.sort(Comparator.comparingLong(WorkoutSet::getSetId));
         workoutDetails.setSets(sets);
-        workoutDetails.setEarliestSet(sets.get(0).getSetId());
+//        workoutDetails.setEarliestSet(sets.get(0).getSetId());
         return workoutDetails;
     }
 
@@ -68,12 +72,17 @@ public class WorkoutService {
 
             try{
                 workoutDetails = getWorkoutDetailsFromWorkoutId(workoutId, date);
+                Long earliestDate = workoutDetails.getSets().get(0).getDateTimeAdded();
+                for(WorkoutSet set : workoutDetails.getSets()){
+                    if(earliestDate > (set.getDateTimeAdded())) earliestDate = set.getDateTimeAdded();
+                }
+                workoutDetails.setEarliestDateAdded(earliestDate);
                 workoutDetailsList.add(workoutDetails);
             }
             catch(IndexOutOfBoundsException e){}
         }
 
-        workoutDetailsList.sort(Comparator.comparing(WorkoutDetails::getEarliestSet));
+        workoutDetailsList.sort(Comparator.comparing(WorkoutDetails::getEarliestDateAdded));
         return workoutDetailsList;
     }
 
