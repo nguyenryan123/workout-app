@@ -6,7 +6,7 @@ CREATE TABLE account (
 
 CREATE TABLE workout (
     workout_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    workout_name VARCHAR(50) NOT NULL,
+    workout_name VARCHAR(30) NOT NULL,
     user_id INT NOT NULL,
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES account(id) ON DELETE CASCADE,
     CONSTRAINT unique_user_workout UNIQUE (user_id, workout_name)
