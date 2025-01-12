@@ -14,6 +14,9 @@ public interface WorkoutRepository extends CrudRepository<Workout,Long> {
     @Query("SELECT * FROM workout WHERE user_id = :user_id")
     List<Workout> findByUserId(Long user_id);
 
+    @Query("SELECT workout_id FROM workout WHERE user_id = :user_id")
+    List<Long> getAllWorkoutIds(Long user_id);
+
     @Query("SELECT * FROM workout WHERE workout_id = :workout_id")
     Workout findByWorkoutId(Long workout_id);
 

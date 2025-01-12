@@ -4,6 +4,7 @@ import model.Workout;
 import model.WorkoutDetails;
 import model.WorkoutSet;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import repositories.WorkoutRepository;
 import repositories.WorkoutSetRepository;
 
@@ -101,5 +102,33 @@ public class WorkoutService {
 
         //if -1 is passed through update is cancelled
         workoutSetRepository.editSetReps(reps, setId);
+    }
+
+//    public List<Integer> daysWithWorkoutInMonth(Long userId, LocalDate start, LocalDate end){
+//        List<Long> workoutIdList = workoutRepository.getAllWorkoutIds(userId);
+//        List<Integer> daysWithWorkout = new ArrayList<>();
+//
+//        for(int i = 1; i < end.getDayOfMonth() + 1; i++){
+//            LocalDate date = LocalDate.of(start.getYear(), start.getMonth(), i);
+//            List<WorkoutSet> workoutSetList = workoutSetRepository.
+//        }
+//
+//    }
+
+    public List<Integer> daysWithWorkout(Long userId, LocalDate start, LocalDate end){
+        ArrayList<Integer> dayList = new ArrayList<>();
+
+        for(int i = 1; i < end.getDayOfMonth() + 1; i++){
+            LocalDate date = LocalDate.of(start.getYear(), start.getMonth(), i);
+            List<WorkoutDetails> workoutDetailsList = allWorkoutDetailsFromUserId(userId, date);
+            if(!workoutDetailsList.isEmpty()){
+                dayList.add(i);
+            }
+
+        }
+
+        return dayList;
+
+
     }
 }
