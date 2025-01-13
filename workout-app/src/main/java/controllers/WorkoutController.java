@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -71,6 +72,8 @@ public class WorkoutController {
             @RequestParam long userId,
             @RequestParam String date
     ){
+        ArrayList<WorkoutDetails> empty = new ArrayList<>();
+        if(date.isEmpty()) return empty;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate workoutDate = LocalDate.parse(date, formatter);
         return workoutService.allWorkoutDetailsFromUserId(userId, workoutDate);
